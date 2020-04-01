@@ -1,4 +1,4 @@
-import {genericCallback }  from '../../utils'
+import {genericCallback }  from '../../../utils'
 const getDoc = ({
   description: 'Returns worlds by name',
   operationId: 'getWorlds',
@@ -28,7 +28,8 @@ export default function (worldService) {
   };
 
   function GET(req, res) {
-    worldService.getWorlds(req, (err, data)=> genericCallback(err, data, res))
+    const {worldName} = req.params;
+    worldService.getWorlds(worldName, (err, data)=> genericCallback(err, data, res))
   }
   GET.apiDoc = getDoc;
   return operations;

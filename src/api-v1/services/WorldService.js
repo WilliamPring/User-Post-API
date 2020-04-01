@@ -1,6 +1,7 @@
 
 export default class WorldService {
-    getWorlds(name) {
-        return worlds[name] ? [worlds[name]] : [];
+    getWorlds(name, callback) {
+        console.log("test")
+        return callback(null, name);
     }
 }
