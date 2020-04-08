@@ -2,7 +2,7 @@ const apiDoc = {
     swagger: '2.0',
     basePath: '/api/v1',
     info: {
-      title: 'A getting started API.',
+      title: 'User API',
       version: '1.0.0'
     },
     definitions: {
@@ -17,6 +17,16 @@ const apiDoc = {
             type: 'string'
           }
         }
+      },
+      UserPolicyRequest: {
+        type: 'object',
+        properties: {
+            userName: { type: 'string' },
+            born: {type: 'string'},
+            name: {type: 'string'},
+            bio: {type: 'string'}
+        },
+        required: ['userName', 'born', 'name', 'bio']
       },
       WorldResponse: {
         type: 'object',
