@@ -34,6 +34,12 @@ const apiDoc = {
 
         }
       },
+      UserResponse: {
+        type: 'object',
+        properties: {
+
+        }
+      },
     },
 
     paths: {}
