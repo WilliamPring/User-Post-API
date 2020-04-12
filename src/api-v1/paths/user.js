@@ -33,7 +33,7 @@ export default function (userService) {
   };
 
   function POST(req, res) {
-    userService.createNewUser(req.body, (err, data)=> genericCallback(err, data, res))
+    userService.createUser(req.body, (err, data)=> genericCallback(err, data, res))
   }
   POST.apiDoc = postDoc;
   return operations;

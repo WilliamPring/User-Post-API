@@ -1,9 +1,9 @@
 import {genericCallback }  from '../../../utils'
 const getDoc = ({
-  description: 'Returns worlds by name',
-  operationId: 'followUser',
+  description: 'Get User Detail',
+  operationId: 'getUser',
   parameters: [
-    { name: 'user', type: 'string', in: 'query', required: true}
+    { name: 'userName', type: 'string', in: 'path', required: true}
   ],
   responses: {
     200: {
@@ -28,8 +28,8 @@ export default function (userService) {
   };
 
   function GET(req, res) {
-
-    userService.getUser("data", (err, data)=> genericCallback(err, data, res))
+    const {userName } = req.params;
+    userService.getUser(userName, (err, data)=> genericCallback(err, data, res))
   }
   GET.apiDoc = getDoc;
   return operations;

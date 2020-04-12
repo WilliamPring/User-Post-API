@@ -24,16 +24,21 @@ const apiDoc = {
             userName: { type: 'string' },
             born: {type: 'string'},
             name: {type: 'string'},
-            bio: {type: 'string'}
+            bio: {type: 'string'},
+            // restaurants: {
+            //   type: 'array',
+            //   items: "Restaurant"
+            // }
         },
         required: ['userName', 'born', 'name', 'bio']
       },
-      WorldResponse: {
-        type: 'object',
-        properties: {
 
-        }
-      },
+      // WorldResponse: {
+      //   type: 'object',
+      //   properties: {
+
+      //   }
+      // },
       UserResponse: {
         type: 'object',
         properties: {

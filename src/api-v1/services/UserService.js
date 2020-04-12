@@ -1,11 +1,23 @@
-import getUserProfile from '../query/getUser'
+//import getUserProfile from '../query/getUser'
+import {createUser, getUser } from '../query'
+import {isNull} from 'lodash'
 export default class UserService {
-    createNewUser(payload, callback) {
-        return callback(null, payload);
+    async createUser(payload, callback) {
+        try {
+            const data = await createUser(payload)
+            console.log("DATA", data)
+            if (isNull(data)) return callback({statusCode: 400, message: "User Exist Already"})
+            return callback(null, data);
+        } catch (e) {
+            console.log(e)
+            callback(e)
+        }
+
     }
     async getUser(userName, callback) {
         try {
-            const data = await getUserProfile("Bento")
+            console.log(userName)
+            const data = await getUser(userName)
             callback(null, data)
         } catch (e) {
             console.log(e)
