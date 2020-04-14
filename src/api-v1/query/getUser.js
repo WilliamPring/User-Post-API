@@ -15,6 +15,17 @@ const getUser = `
         following {
             userName
         }
+        dined {
+            lastAteAt {
+              formatted
+            }
+            favorite
+            Restaurant {
+              name
+              _id
+              address
+            }
+          }
     }
   }
 `

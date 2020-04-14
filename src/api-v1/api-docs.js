@@ -32,7 +32,26 @@ const apiDoc = {
         },
         required: ['userName', 'born', 'name', 'bio']
       },
-
+      UserFollowerRequest: {
+        type: 'object',
+        properties: {
+            unfollowUser: { type: 'array', items: { $ref: '#/definitions/User' } },
+            followUser: { type: 'array', items: {  $ref: '#/definitions/User'} }
+        }
+      },
+      User: {
+        type: 'object',
+        properties: {
+          id: {
+            description: 'The userid',
+            type: 'integer'
+          },
+          username: {
+            description: 'The username',
+            type: 'string'
+          }
+        }
+      },
       // WorldResponse: {
       //   type: 'object',
       //   properties: {

@@ -18,6 +18,7 @@ export default class UserService {
         try {
             console.log(userName)
             const data = await getUser(userName)
+            console.log(data)
             callback(null, data)
         } catch (e) {
             console.log(e)
