@@ -5,6 +5,8 @@ const apiDoc = {
       title: 'User API',
       version: '1.0.0'
     },
+    consumes: ['application/json'],
+    produces: ['application/json'],
     definitions: {
       Error: {
           additionalProperties: true,

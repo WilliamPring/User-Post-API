@@ -2,6 +2,7 @@ import {genericCallback }  from '../../../../utils'
 const putDoc = ({
   description: 'Get User Detail',
   operationId: 'updateUserFollower',
+  consumes: ['application/json'],
   parameters: [
     { name: 'userId', type: 'string', in: 'path', required: true},
     {
@@ -59,10 +60,9 @@ export default function (userService) {
   };
 
   function PUT(req, res) {
-    const { userId } = req.params;
-    console.log(userId)
-    console.log(req.body)
-    userService.updateUserFollower(userName, (err, data)=> genericCallback(err, data, res))
+    const {userId } = req.params;
+    const userUpdatePayload = req.body;
+    userService.updateUserFollower(userId, userUpdatePayload, (err, data)=> genericCallback(err, data, res))
   }
   function DELETE(req, res) {
     return null;
