@@ -32,11 +32,16 @@ const apiDoc = {
         },
         required: ['userName', 'born', 'name', 'bio']
       },
-      UserFollowerRequest: {
+      UserFollowRequest: {
         type: 'object',
         properties: {
-            unfollowUser: { type: 'array', items: { $ref: '#/definitions/User' } },
-            followUser: { type: 'array', items: {  $ref: '#/definitions/User'} }
+            users: { type: 'array', items: {  $ref: '#/definitions/User'} }
+        }
+      },
+      UserUnFollowRequest: {
+        type: 'object',
+        properties: {
+            users: { type: 'array', items: { $ref: '#/definitions/User' } },
         }
       },
       User: {
@@ -52,12 +57,6 @@ const apiDoc = {
           }
         }
       },
-      // WorldResponse: {
-      //   type: 'object',
-      //   properties: {
-
-      //   }
-      // },
       UserResponse: {
         type: 'object',
         properties: {

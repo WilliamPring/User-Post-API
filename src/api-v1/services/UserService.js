@@ -12,6 +12,8 @@ export default class UserService {
             console.log(e)
             callback(e)
         }
+    }
+    async updateUserFollower(payload, callback) {
 
     }
     async getUser(userName, callback) {

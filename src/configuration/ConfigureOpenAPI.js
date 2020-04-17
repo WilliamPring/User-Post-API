@@ -16,6 +16,8 @@ export default class ConfigureOpenApi {
             paths: resolve(__dirname, '../api-v1/paths'),
             consumesMiddleware: {
                 'application/json': bodyParser.json(),
+                'text/text': bodyParser.text(),
+                'application/x-www-form-urlencoded': bodyParser.urlencoded({extended: true})
             }
         });
         app.use((err, _, res, next) =>{

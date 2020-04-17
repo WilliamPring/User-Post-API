@@ -6,7 +6,7 @@ const graphqlUrl = config.get('graphqlUrl');
 const getUser = `
     query($filter: _UserFilter) {
         User(filter: $filter) {
-        _id
+        uuid
         userName
         name
         followers {

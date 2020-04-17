@@ -7,6 +7,7 @@ const getUser = `
 mutation($input: UserInput!) {
     CreateUser(input: $input) {
         userName
+        uuid
         name
     }
   }
