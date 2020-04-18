@@ -37,7 +37,14 @@ const apiDoc = {
       UserFollowRequest: {
         type: 'object',
         properties: {
-            users: { type: 'array', items: {  $ref: '#/definitions/User'} }
+          id: {
+            description: 'The userid',
+            type: 'integer'
+          },
+          username: {
+            description: 'The username',
+            type: 'string'
+          }
         }
       },
       UserUnFollowRequest: {

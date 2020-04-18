@@ -1,6 +1,6 @@
 //import getUserProfile from '../query/getUser'
-import {createUser, getUser } from '../query'
-import {isNull} from 'lodash'
+import {createUser, getUser, createFollowing } from '../query'
+import {isNull, get, isEmpty} from 'lodash'
 export default class UserService {
     async createUser(payload, callback) {
         try {
@@ -13,9 +13,18 @@ export default class UserService {
             callback(e)
         }
     }
-    async updateUserFollower(payload, callback) {
-
+    async updateUserFollower(userName, followerUserName, callback) {
+        try {
+            console.log(userName, followerUserName)
+            const data = await createFollowing(userName, followerUserName.username);
+            console.log(data)
+            return callback(null, data);
+        } catch(e) {
+            console.log(e)
+        }
     }
+
+
     async getUser(userName, callback) {
         try {
             console.log(userName)
