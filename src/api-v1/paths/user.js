@@ -2,6 +2,7 @@ import {genericCallback }  from '../../utils'
 const postDoc = ({
   description: 'Returns worlds by name',
   operationId: 'createNewUser',
+  tags: ['User'],
   consumes: ['application/json'],
   parameters: [
     {
@@ -27,14 +28,18 @@ const postDoc = ({
 });
 
 
+
+
+
 export default function (userService) {
   const operations = {
-    POST
+    POST,
   };
 
   function POST(req, res) {
     userService.createUser(req.body, (err, data)=> genericCallback(err, data, res))
   }
+
   POST.apiDoc = postDoc;
   return operations;
 }

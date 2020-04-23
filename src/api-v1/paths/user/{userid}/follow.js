@@ -1,6 +1,7 @@
 import {genericCallback }  from '../../../../utils'
 const putDoc = ({
   description: 'Get User Detail',
+  tags: ['User'],
   operationId: 'updateUserFollower',
   consumes: ['application/json'],
   parameters: [
@@ -28,12 +29,14 @@ const putDoc = ({
 });
 const deleteUserFollower = ({
   description: 'Get User Detail',
+  tags: ['User'],
   operationId: 'update user',
+  consumes: ['application/json'],
   parameters: [
     { name: 'userId', type: 'string', in: 'path', required: true},
     {
       in: 'body', schema: {
-        $ref: '#/definitions/UserUnFollowRequest'
+        $ref: '#/definitions/UserFollowRequest'
       }, name: 'userRequest'
     }
   ],
@@ -41,7 +44,7 @@ const deleteUserFollower = ({
     200: {
       description: 'A list of worlds that match the requested name.',
       schema: {
-        $ref: '#/definitions/UserFollowRequest'
+        $ref: '#/definitions/UserResponse'
       }
     },
     default: {
@@ -65,6 +68,9 @@ export default function (userService) {
     userService.updateUserFollower(userId, userUpdatePayload, (err, data)=> genericCallback(err, data, res))
   }
   function DELETE(req, res) {
+    const {userId } = req.params;
+    const userUpdatePayload = req.body;
+    userService.removeUserFollower(userId, userUpdatePayload, (err, data)=> genericCallback(err, data, res))
     return null;
   }
   PUT.apiDoc = putDoc;

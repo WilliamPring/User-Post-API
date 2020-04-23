@@ -13,10 +13,31 @@ export default class UserService {
             callback(e)
         }
     }
+
+    async updateUser(payload, callback) {
+        try {
+            return callback(null, null );
+        } catch (e) {
+            console.log(e)
+            callback(e)
+        }
+    }
+
     async updateUserFollower(userName, followerUserName, callback) {
         try {
             console.log(userName, followerUserName)
             const data = await createFollowing(userName, followerUserName.username);
+            console.log(data)
+            return callback(null, data);
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
+    async removeUserFollower(userName, unfollowUser, callback) {
+        try {
+            console.log(userName, unfollowUser)
+            const data = await createFollowing(userName, unfollowUser.username);
             console.log(data)
             return callback(null, data);
         } catch(e) {

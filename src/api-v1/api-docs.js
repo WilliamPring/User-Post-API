@@ -27,20 +27,12 @@ const apiDoc = {
             born: {type: 'string'},
             name: {type: 'string'},
             bio: {type: 'string'},
-            // restaurants: {
-            //   type: 'array',
-            //   items: "Restaurant"
-            // }
         },
         required: ['userName', 'born', 'name', 'bio']
       },
       UserFollowRequest: {
         type: 'object',
         properties: {
-          id: {
-            description: 'The userid',
-            type: 'integer'
-          },
           username: {
             description: 'The username',
             type: 'string'
@@ -56,13 +48,27 @@ const apiDoc = {
       User: {
         type: 'object',
         properties: {
-          id: {
-            description: 'The userid',
-            type: 'integer'
-          },
           username: {
             description: 'The username',
             type: 'string'
+          }
+        }
+      },
+      UserReviewRequest: {
+        type: 'object',
+        properties: {
+          resterantId: {
+            type: 'integer'
+          },
+          reviewSummary: {
+            type: 'string'
+          },
+          starRating: {
+            type: 'integer'
+          },
+          foods: {
+            type: 'array',
+            items: {type: 'string'}
           }
         }
       },
@@ -73,8 +79,11 @@ const apiDoc = {
         }
       },
     },
-
-    paths: {}
+    paths: {},
+    tags: [
+      { description: 'User API', name: 'User' },
+      { description: ' API', name: 'Review' }
+  ]
   };
 
   export default apiDoc;
