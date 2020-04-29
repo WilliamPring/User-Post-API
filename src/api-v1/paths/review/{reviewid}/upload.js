@@ -1,15 +1,10 @@
-import {genericCallback }  from '../../utils'
+import {genericCallback }  from '../../../../utils'
 const postDoc = ({
   description: 'Returns worlds by name',
-  operationId: 'createReview',
+  operationId: 'createImagesForReview',
   tags: ['Review'],
-  consumes: ['application/json', 'multipart/form-data'],
+  consumes: ['multipart/form-data'],
   parameters: [
-    {
-        in: 'body', schema: {
-            $ref: '#/definitions/UserReviewRequest'
-        }, name: 'userRequest'
-    },
     {
       name: 'image',
       in: 'formData',
@@ -33,6 +28,31 @@ const postDoc = ({
       in: 'formData',
       description: 'The four Image of your food',
       type: 'file'
+    },
+    {
+      name: 'resterantId',
+      in: 'formData',
+      description: 'resterant uuid',
+      type: 'string'
+    },
+    {
+      name: 'reviewSummary',
+      in: 'formData',
+      description: 'Review Summary',
+      type: 'string'
+    },
+    {
+      name: 'starRating',
+      in: 'formData',
+      description: 'Star Rating to 5',
+      type: 'integer'
+    },
+    {
+      name: 'foods',
+      in: 'formData',
+      description: 'List of Food Names',
+      type: 'array',
+      items: {type: 'string'}
     }
   ],
   responses: {
@@ -61,8 +81,9 @@ export default function (reviewService) {
   };
 
   function POST(req, res) {
-    console.log(req.files.image); // the uploaded file object
-    reviewService.createReview(req.body, (err, data)=> genericCallback(err, data, res))
+    const data = [];
+    console.log(req.body)
+    reviewService.createImagesForReview(req.body, (err, data)=> genericCallback(err, data, res))
   }
 
   POST.apiDoc = postDoc;
