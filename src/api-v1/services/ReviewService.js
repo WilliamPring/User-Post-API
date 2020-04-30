@@ -1,5 +1,6 @@
-import {uploadImage} from './utils'
+import {uploadImage, } from './utils'
 import {createReview} from '../query'
+import {imageProcessingQueue} from '../../utils'
 export default class ReviewService {
     getWorlds(name, callback) {
         console.log("test")
@@ -8,11 +9,12 @@ export default class ReviewService {
     async createReview(payload, images, callback) {
       //  const data = uploadImage("Bento", 'latias', payload.images[0].urlBase64);
       try {
-        const {resterantId, userName, reviewSummary, foods, reviewRating} = payload;
-        console.log(foods)
-        const data = await createReview(userName, resterantId, reviewSummary, reviewRating, foods);
-        console.log(data)
-        return callback(null, data)
+        // const {resterantId, userName, reviewSummary, foods, reviewRating} = payload;
+        // console.log(foods)
+        // const data = await createReview(userName, resterantId, reviewSummary, reviewRating, foods);
+        // console.log(data)
+        imageProcessingQueue(images)
+        return callback(null, null)
       } catch(e) {
           console.log(e)
       }

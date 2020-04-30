@@ -61,25 +61,8 @@ const postDoc = ({
       name: 'image',
       in: 'formData',
       description: 'The first Image of your food',
-      type: 'file'
-    },
-    {
-      name: 'image1',
-      in: 'formData',
-      description: 'The second Image of your food',
-      type: 'file'
-    },
-    {
-      name: 'image2',
-      in: 'formData',
-      description: 'The three Image of your food',
-      type: 'file'
-    },
-    {
-      name: 'image3',
-      in: 'formData',
-      description: 'The four Image of your food',
-      type: 'file'
+      type: 'array',
+      items: {type: 'string', format: 'binary'}
     },
     {
       name: 'resterantId',
@@ -140,9 +123,7 @@ export default function (reviewService) {
   };
 
   function POST(req, res) {
-    console.log(req.files); // the uploaded file object
-    console.log(req.body)
-    reviewService.createReview(req.body, req.files, (err, data)=> genericCallback(err, data, res))
+    reviewService.createReview(req.body, req.files.images, (err, data)=> genericCallback(err, data, res))
   }
 
   POST.apiDoc = postDoc;

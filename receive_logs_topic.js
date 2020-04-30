@@ -35,7 +35,9 @@ amqp.connect('amqp://admin:pass@localhost', function(error0, connection) {
       });
 
       channel.consume(q.queue, function(msg) {
-        console.log(" [x] %s:'%s'", msg.fields.routingKey, msg.content.toString());
+        console.log(msg)
+        // console.log(JSON.parse(msg.content));
+        // console.log(" [x] %s:'%s'", msg.fields.routingKey, msg.content.toString());
       }, {
         noAck: true
       });

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import https from 'https'
 import config from 'config'
+import {forEach} from 'lodash'
 //var amqp = require('amqplib/callback_api');
 import { connect } from 'amqplib/callback_api'
 export const genericCallback = (err, data, res) => {
@@ -19,16 +20,21 @@ export const apiClient = axios.create({
     })
 })
 
-export const imageProcessingQueue = (images) => {
+export const imageProcessingQueue = (images, postID) => {
+    postID = 1;
     const queue = config.get('Queue');
-    console.log(queue)
     const ampqUrl = `amqp://${queue.user}:${queue.secret}@${queue.url}`
     connect(ampqUrl, (err, conn) => {
         if(err) {throw err}
         conn.createChannel((errCh, channel) => {
             const exchange = queue.topic.image;
             channel.assertExchange(exchange, 'topic', { durable: false } )
-            channel.publish(exchange, '#', Buffer.from("Hello World"))
+            forEach(images, (value)=> {
+                const {data, mv, ...headers } = value;
+                console.log(data)
+                console.log(headers)
+                channel.publish(exchange, '#', data, {headers})
+            })
         })
     });
 }
