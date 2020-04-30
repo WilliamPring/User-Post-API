@@ -12,7 +12,7 @@ export default class ReviewService {
         console.log(foods)
         const data = await createReview(userName, resterantId, reviewSummary, reviewRating, foods);
         console.log(data)
-        return callback(null, null)
+        return callback(null, data)
       } catch(e) {
           console.log(e)
       }

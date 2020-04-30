@@ -15,7 +15,7 @@ amqp.connect('amqp://admin:pass@localhost', function(error0, connection) {
     if (error1) {
       throw error1;
     }
-    var exchange = 'topic_user';
+    var exchange = 'user.review.image';
 
     channel.assertExchange(exchange, 'topic', {
       durable: false
