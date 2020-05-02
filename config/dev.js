@@ -6,10 +6,6 @@ module.exports = ({
         url: 'localhost',
         user: 'admin',
         secret: 'pass',
-        topic: {
-            image: 'user.review.image',
-            error: 'app.alert.error',
-            warning: 'app.alert.warning'
-        }
+
     }
 })

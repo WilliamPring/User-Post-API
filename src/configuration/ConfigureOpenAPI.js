@@ -20,7 +20,7 @@ export default class ConfigureOpenApi {
                 'text/text': bodyParser.text(),
                 'application/x-www-form-urlencoded': bodyParser.urlencoded({extended: true}),
                 'multipart/form-data': fileupload({
-                    useTempFiles : true,
+                    useTempFiles : false,
                     tempFileDir : '/tmp/'
                 })
             }

@@ -1,9 +1,10 @@
 import axios from 'axios'
 import https from 'https'
 import config from 'config'
-import {forEach} from 'lodash'
+import {forEach, isArray, merge} from 'lodash'
 //var amqp = require('amqplib/callback_api');
 import { connect } from 'amqplib/callback_api'
+
 export const genericCallback = (err, data, res) => {
     if(err && err.statusCode) {
         res.status(err.statusCode).send(err)
@@ -20,8 +21,11 @@ export const apiClient = axios.create({
     })
 })
 
-export const imageProcessingQueue = (images, postID) => {
-    postID = 1;
+export const generateUniqueImageName = (userName, restaurantId, postId, imageName) => {
+    return `${userName}/${postId}/${restaurantId}/${imageName}`
+}
+
+export const imageProcessingQueue = (imagesCollection, userName, resterantId , postId) => {
     const queue = config.get('Queue');
     const ampqUrl = `amqp://${queue.user}:${queue.secret}@${queue.url}`
     connect(ampqUrl, (err, conn) => {
@@ -29,12 +33,22 @@ export const imageProcessingQueue = (images, postID) => {
         conn.createChannel((errCh, channel) => {
             const exchange = queue.topic.image;
             channel.assertExchange(exchange, 'topic', { durable: false } )
-            forEach(images, (value)=> {
-                const {data, mv, ...headers } = value;
-                console.log(data)
-                console.log(headers)
-                channel.publish(exchange, '#', data, {headers})
-            })
+            if(!isArray(imagesCollection)) {
+             const imageName = generateUniqueImageName(userName, resterantId, postId, imagesCollection.name)
+             const headers = {
+                 name: imagesCollection.name,
+                 postId,
+                 imageName,
+                 mimetype: imagesCollection.mimetype,
+             }
+             console.log(headers)
+             channel.publish(exchange, '#', imagesCollection.data, {headers})
+            } else {
+                forEach(imagesCollection.images, (value)=> {
+                    const {data, mv, ...headers } = value;
+                    channel.publish(exchange, '#', data, {headers})
+                })
+            }
         })
     });
 }

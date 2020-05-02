@@ -1,55 +1,5 @@
 import {genericCallback }  from '../../utils'
-// const postDoc = ({
-//   description: 'Returns worlds by name',
-//   operationId: 'createReview',
-//   tags: ['Review'],
-//   consumes: ['application/json', 'multipart/form-data'],
-//   parameters: [
-//     {
-//         in: 'body', schema: {
-//             $ref: '#/definitions/UserReviewRequest'
-//         }, name: 'userRequest'
-//     },
-//     {
-//       name: 'image',
-//       in: 'formData',
-//       description: 'The first Image of your food',
-//       type: 'file'
-//     },
-//     {
-//       name: 'image1',
-//       in: 'formData',
-//       description: 'The second Image of your food',
-//       type: 'file'
-//     },
-//     {
-//       name: 'image2',
-//       in: 'formData',
-//       description: 'The three Image of your food',
-//       type: 'file'
-//     },
-//     {
-//       name: 'image3',
-//       in: 'formData',
-//       description: 'The four Image of your food',
-//       type: 'file'
-//     }
-//   ],
-//   responses: {
-//     200: {
-//       description: 'The user that was created',
-//       schema: {
-
-//       }
-//     },
-//     default: {
-//       description: 'ERROR',
-//       schema: {
-//         $ref: '#/definitions/Error'
-//       }
-//     }
-//   }
-// });
+import fs from 'fs'
 
 const postDoc = ({
   description: 'Returns worlds by name',
@@ -58,7 +8,7 @@ const postDoc = ({
   consumes: ['multipart/form-data'],
   parameters: [
     {
-      name: 'image',
+      name: 'images',
       in: 'formData',
       description: 'The first Image of your food',
       type: 'array',
@@ -123,6 +73,7 @@ export default function (reviewService) {
   };
 
   function POST(req, res) {
+
     reviewService.createReview(req.body, req.files.images, (err, data)=> genericCallback(err, data, res))
   }
 

@@ -9,5 +9,13 @@ module.exports = ({
         xssFilter: true,
         hidePowerBy: true,
         referrerPolicy: { policy: 'same-origin' }
+    },
+    Queue: {
+        routingKey: '#',
+        topic: {
+            image: 'user.review.image',
+            error: 'app.alert.error',
+            warning: 'app.alert.warning'
+        }
     }
 })
