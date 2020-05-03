@@ -10,6 +10,22 @@ mutation($userName: String!, $restaurantID: String!, $reviewSummary: String!, $r
         starRating
         reviewSummary
         _id
+        restaurant {
+            uuid
+            name
+            location {
+              name
+              municipality {
+                provienceState
+                cities {
+                  name
+                }
+                country {
+                  name
+                }
+              }
+            }
+        }
     }
   }
 `
@@ -32,7 +48,6 @@ const createReview = async (userName, restaurantID,  reviewSummary, reviewRating
             }
         }).then(({data}) => get(data, 'data.CreateUserReview', null))
 
-    //console.log(userReview)
 
     return apiClient
     .post(graphqlUrl, {

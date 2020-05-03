@@ -21,11 +21,9 @@ export const apiClient = axios.create({
     })
 })
 
-export const generateUniqueImageName = (userName, restaurantId, postId, imageName) => {
-    return `${userName}/${postId}/${restaurantId}/${imageName}`
-}
 
-export const imageProcessingQueue = (imagesCollection, userName, resterantId , postId) => {
+
+export const imageProcessingQueue = (imagesCollection, userName, restaurantId , reviewId, restaurant) => {
     const queue = config.get('Queue');
     const ampqUrl = `amqp://${queue.user}:${queue.secret}@${queue.url}`
     connect(ampqUrl, (err, conn) => {
@@ -34,12 +32,15 @@ export const imageProcessingQueue = (imagesCollection, userName, resterantId , p
             const exchange = queue.topic.image;
             channel.assertExchange(exchange, 'topic', { durable: false } )
             if(!isArray(imagesCollection)) {
-             const imageName = generateUniqueImageName(userName, resterantId, postId, imagesCollection.name)
+                console.log(restaurant)
              const headers = {
                  name: imagesCollection.name,
-                 postId,
-                 imageName,
+                 restaurantId,
+                 reviewId,
+                 userName,
                  mimetype: imagesCollection.mimetype,
+                 restaurantName: restaurant.name,
+                 restaurantLocation: restaurant.location.name
              }
              console.log(headers)
              channel.publish(exchange, '#', imagesCollection.data, {headers})
