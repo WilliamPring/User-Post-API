@@ -29,7 +29,7 @@
     "express-openapi": "^6.0.0",
     "helmet": "^3.22.0",
     "https": "^1.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "object-hash": "^2.0.3",
     "swagger-ui-express": "^4.1.4",
     "winston": "^3.2.1"
